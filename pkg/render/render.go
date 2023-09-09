@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/cbass2404/hello_world_golang/pkg/config"
+	"github.com/cbass2404/hello_world_golang/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -19,8 +20,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+	return td
+}
+
 // RenderTemplate renders template using html/template
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, tmplData *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -38,7 +43,9 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	buf := new(bytes.Buffer)
 
-	_ = t.Execute(buf, nil)
+	tmplData = AddDefaultData(tmplData)
+
+	_ = t.Execute(buf, tmplData)
 
 	// render the tmpl
 	_, err := buf.WriteTo(w)
