@@ -2,8 +2,9 @@
   "name": "hello-world",
   "version": "1.0.0",
   "description": "",
-  "main": "main.go",
+  "main": "cmd/web/main.go",
   "scripts": {
+    "start": "go run cmd/web/main.go",
     "test": "go test -cover"
   },
   "author": "Cory Bass",
