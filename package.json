@@ -1,0 +1,11 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.go",
+  "scripts": {
+    "test": "go test -cover"
+  },
+  "author": "Cory Bass",
+  "license": "ISC"
+}
