@@ -4,7 +4,7 @@
   "description": "",
   "main": "cmd/web/main.go",
   "scripts": {
-    "start": "go run cmd/web/main.go",
+    "start": "go run ./cmd/web",
     "test": "go test -cover"
   },
   "author": "Cory Bass",
