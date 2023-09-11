@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/cbass2404/hello_world_golang/pkg/config"
 	"github.com/cbass2404/hello_world_golang/pkg/handlers"
 	"github.com/cbass2404/hello_world_golang/pkg/render"
@@ -12,9 +14,19 @@ import (
 
 const portNumber = ":8080"
 
+var app config.AppConfig
+
 // main is the main application function
 func main() {
-	var app config.AppConfig
+
+	// change this to true when in production
+	app.InProduction = false
+
+	app.Session = scs.New()
+	app.Session.Lifetime = 24 * time.Hour
+	app.Session.Cookie.Persist = true
+	app.Session.Cookie.SameSite = http.SameSiteLaxMode
+	app.Session.Cookie.Secure = app.InProduction
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
